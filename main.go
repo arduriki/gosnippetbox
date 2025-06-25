@@ -9,6 +9,11 @@ import (
 
 // Add home handler which writes a byte slice containing a response body.
 func home(w http.ResponseWriter, r *http.Request) {
+	// Create a response header map:
+	// the first parameter is the header name,
+	// the second parameter is the header value.
+	w.Header().Add("Server", "Go")
+
 	w.Write([]byte("Hello from Snippetbox"))
 }
 
@@ -25,8 +30,7 @@ func snippetView(w http.ResponseWriter, r *http.Request) {
 	}
     
 	// A message with the id value as the HTTP response.
-	msg := fmt.Sprintf("Display a specific snippet with ID %d...", id)
-	w.Write([]byte(msg))
+	fmt.Fprintf(w, "Display a specific snippet with ID %d...", id)
 }
 
 // Add a snippetCreate handler function.
@@ -36,6 +40,10 @@ func snippetCreate(w http.ResponseWriter, r *http.Request) {
 
 // Add a snippetCreatePost handler function.
 func snippetCreatePost(w http.ResponseWriter, r *http.Request) {
+	// Send a status created before the w.Write
+	w.WriteHeader(http.StatusCreated)
+
+	// Write the response body.
 	w.Write([]byte("Save a new snippet..."))
 }
 
