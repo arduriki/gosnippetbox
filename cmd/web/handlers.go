@@ -51,14 +51,14 @@ func snippetView(w http.ResponseWriter, r *http.Request) {
 		http.NotFound(w, r)
 		return
 	}
-    
+
 	// A message with the id value as the HTTP response.
 	fmt.Fprintf(w, "Display a specific snippet with ID %d...", id)
 }
 
 // Add a snippetCreate handler function.
 func snippetCreate(w http.ResponseWriter, r *http.Request) {
-    w.Write([]byte("Display a form for creating a new snippet..."))
+	w.Write([]byte("Display a form for creating a new snippet..."))
 }
 
 // Add a snippetCreatePost handler function.

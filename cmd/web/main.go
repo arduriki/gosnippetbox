@@ -9,6 +9,14 @@ func main() {
 	// Initialize a new servemux, then register the home function
 	// as a handler for the "/" URL pattern.
 	mux := http.NewServeMux()
+
+	// File server to serve the static files
+	fileServer := http.FileServer(http.Dir("./ui/static/"))
+
+	// Register the file server and strip "/static" prefix before
+	// the request reaches the file server.
+	mux.Handle("GET /static/", http.StripPrefix("/static", fileServer))
+
 	// {$} to prevent subtree path, it helps to match a single slash with
 	// nothing else.
 	mux.HandleFunc("GET /{$}", home) // GET to restrict the HTTP method.
